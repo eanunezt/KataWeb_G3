@@ -1,8 +1,8 @@
 __author__ = 'asistente'
 from unittest import TestCase
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from time import sleep
+from selenium.webdriver.common.by import By
 
 
 class FunctionalTest(TestCase):
@@ -14,36 +14,23 @@ class FunctionalTest(TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_editar(self):
 
+
+    def test_comentar(self):
         self.browser.get('http://localhost:8000')
-
-        # login usuario
-        link = self.browser.find_element_by_id('id_login')
+        link = self.browser.find_element_by_id('trabajador')
         link.click()
-        username = self.browser.find_element_by_id('id_login_username')
-        username.send_keys('juan648')
-        password = self.browser.find_element_by_id('id_login_password')
-        password.send_keys('clave123')
-        ingresar = self.browser.find_element_by_id('id_ingresar')
-        ingresar.click()
-        self.browser.implicitly_wait(3)
-        logout = self.browser.find_element_by_id('id_logout')
 
-        #Editar
-        self.browser.implicitly_wait(5)
-        editar = self.browser.find_element_by_id('id_editar')
-        sleep(4)
-        editar.click()
+        #Correo
+        correo = self.browser.find_element_by_id('correo')
+        correo.send_keys('correoIndep@uniandes.edu.co')
 
-        nombre = self.browser.find_element_by_id('id_nombre')
-        nombre.clear()
-        nombre.send_keys('Jose Andres')
+        #Comentario
+        comentario = self.browser.find_element_by_id('comentario')
+        comentario.send_keys('Este es un comentario')
 
-        #Grabar
-        botonGrabar = self.browser.find_element_by_id('id_grabar')
-        botonGrabar.click()
-        self.browser.implicitly_wait(3)
+        botonComentar = self.browser.find_element_by_id('comentar')
+        botonComentar.click()
 
-        strong = self.browser.find_element(By.XPATH, '//strong[text()="SUCCESS: "]')
-        self.assertIn('SUCCESS:', str(strong.text))
+        h4 = self.browser.find_element(By.XPATH, '//h4[text()="correoIndep@uniandes.edu.co "]')
+        self.assertIn('correoIndep@uniandes.edu.co', str(h4.text))
