@@ -43,7 +43,7 @@ class FunctionalTest(TestCase):
         imagen.send_keys('D:\Imagenes\developer.jpg')
 
         nombreUsuario = self.browser.find_element_by_id('id_username')
-        nombreUsuario.send_keys('juan648')
+        nombreUsuario.send_keys('juan650')
 
         clave = self.browser.find_element_by_id('id_password')
         clave.send_keys('clave123')
@@ -69,7 +69,7 @@ class FunctionalTest(TestCase):
         login = self.browser.find_element_by_id('id_login')
         login.click()
         username = self.browser.find_element_by_id('id_login_username')
-        username.send_keys('juan647')
+        username.send_keys('juan648')
         password = self.browser.find_element_by_id('id_login_password')
         password.send_keys('clave123')
         ingresar = self.browser.find_element_by_id('id_ingresar')

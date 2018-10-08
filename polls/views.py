@@ -16,19 +16,22 @@ from django.contrib import auth
 
 
 def index(request):
+    login_form = UserForm(request.POST)
     trabajadores = Trabajador.objects.all()
     tipos_de_servicios = TiposDeServicio.objects.all()
     form_trabajador = TrabajadorForm(request.POST)
     form_usuario = UserForm(request.POST)
 
     context = {'trabajadores': trabajadores, 'tipos_de_servicios': tipos_de_servicios,
-               'form_trabajador': form_trabajador, 'form_usuario': form_usuario, 'base_url': settings.STATIC_URL}
+                'login_form': login_form,'form_trabajador': form_trabajador, 'form_usuario': form_usuario, 'base_url': settings.STATIC_URL}
+
+
     return render(request, 'polls/index.html', context)
 
 
 def login(request):
-    username = request.POST.get('usrname', '')
-    password = request.POST.get('psw', '')
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password)
     if user is not None:
         auth.login(request, user)
